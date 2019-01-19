@@ -29,7 +29,6 @@ public class Robot extends TimedRobot{
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
     Joystick stick; 
     Joystick stick1;
-    DifferentialDrive myDrive;
     private double m_speedLimiter;
     private int speedLimiterAxis;
     Double leftm;
@@ -44,23 +43,9 @@ public class Robot extends TimedRobot{
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    PWMVictorSPX left1= new PWMVictorSPX(0);
-    PWMVictorSPX left2= new PWMVictorSPX(1);
-    PWMVictorSPX right1= new PWMVictorSPX(2);
-    PWMVictorSPX right2= new PWMVictorSPX(3);
-    left1.setInverted(true);
-    left2.setInverted(false);
-    right1.setInverted(true);
-    right2.setInverted(false);
-
-    SpeedControllerGroup rightSpeedGroup = new SpeedControllerGroup(right1,right2);
-    SpeedControllerGroup leftSpeedGroup = new SpeedControllerGroup(left1, left2); 
+   
         stick = new Joystick(0); 
 
-        myDrive = new DifferentialDrive(rightSpeedGroup, leftSpeedGroup);
-        m_speedLimiter = stick.getRawAxis(speedLimiterAxis); 
-        leftm= -stick.getRawAxis(1)/(2-m_speedLimiter); 
-        rightm= -stick.getRawAxis(5)/(2-m_speedLimiter); 
   }
 
   /**

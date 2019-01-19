@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -33,7 +32,7 @@ public class Robot extends TimedRobot{
     private int speedLimiterAxis;
     Double leftm;
     Double rightm; 
-
+    drivetrain DriveTrain= new drivetrain(0,4,1,3,stick);
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.

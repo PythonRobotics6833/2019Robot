@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 /**
  * Add your docs here.
  */
-public class DriveTrain {
+public class drivetrain {
     DifferentialDrive MyDrive;
     
     PWMVictorSPX Motor1;
@@ -28,14 +28,14 @@ public class DriveTrain {
     private double v_speedLimiter;
     private int speedLimiterAxis=3;
     //Base constructer
-    public void DriveTrain()
+    public drivetrain()
     {
         return;
     }
 
     
     //FRC 2019 main robot
-    public void DriveTrain(int VictorMotorLeft1, int VictorMotorLeft2, int VictorMotorRight1, int VictorMotorRight2, Joystick stick)
+    public drivetrain(int VictorMotorLeft1, int VictorMotorLeft2, int VictorMotorRight1, int VictorMotorRight2, Joystick stick)
     {
         joystick=stick;
 

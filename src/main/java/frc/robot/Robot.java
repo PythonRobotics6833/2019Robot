@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,7 +22,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot{
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -45,8 +44,17 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    SpeedControllerGroup rightSpeedGroup = new SpeedControllerGroup( new PWMVictorSPX(0), new PWMVictorSPX(2));
-        SpeedControllerGroup leftSpeedGroup = new SpeedControllerGroup(new PWMVictorSPX(1), new PWMVictorSPX(3)); 
+    PWMVictorSPX left1= new PWMVictorSPX(0);
+    PWMVictorSPX left2= new PWMVictorSPX(1);
+    PWMVictorSPX right1= new PWMVictorSPX(2);
+    PWMVictorSPX right2= new PWMVictorSPX(3);
+    left1.setInverted(true);
+    left2.setInverted(false);
+    right1.setInverted(true);
+    right2.setInverted(false);
+
+    SpeedControllerGroup rightSpeedGroup = new SpeedControllerGroup(right1,right2);
+    SpeedControllerGroup leftSpeedGroup = new SpeedControllerGroup(left1, left2); 
         stick = new Joystick(0); 
 
         myDrive = new DifferentialDrive(rightSpeedGroup, leftSpeedGroup);

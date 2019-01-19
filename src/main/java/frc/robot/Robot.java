@@ -32,7 +32,7 @@ public class Robot extends TimedRobot{
     private int speedLimiterAxis;
     Double leftm;
     Double rightm; 
-    drivetrain DriveTrain= new drivetrain(0,4,1,3,stick);
+    drivetrain DriveTrain;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -42,8 +42,10 @@ public class Robot extends TimedRobot{
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-   
-        stick = new Joystick(0); 
+    stick = new Joystick(0); 
+    
+    DriveTrain= new drivetrain(0,4,1,3,stick);
+    
 
   }
 
@@ -98,7 +100,7 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void teleopPeriodic() {
-
+    DriveTrain.tankdrive();
   }
 
   /**

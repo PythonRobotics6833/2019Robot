@@ -8,12 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -22,15 +20,13 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
  * project.
  */
 public class Robot extends TimedRobot{
+  /*
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  */
     Joystick stick; 
-    Joystick stick1;
-    private double m_speedLimiter;
-    private int speedLimiterAxis;
-    Double leftm;
     Double rightm; 
     drivetrain DriveTrain;
   /**
@@ -39,11 +35,13 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    //m_chooser.addOption("My Auto", kCustomAuto);
+    //SmartDashboard.putData("Auto choices", m_chooser);
+
+
     stick = new Joystick(0); 
-    
+    //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
     
 
@@ -74,9 +72,11 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    /*
+     m_autoSelected = m_chooser.getSelected();
+     m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+     System.out.println("Auto selected: " + m_autoSelected);
+    */
   }
 
   /**
@@ -84,7 +84,7 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
+    /*switch (m_autoSelected) {
       case kCustomAuto:
         // Put custom auto code here
         break;
@@ -93,6 +93,7 @@ public class Robot extends TimedRobot{
         // Put default auto code here
         break;
     }
+    */
   }
 
   /**
@@ -100,6 +101,8 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void teleopPeriodic() {
+
+    //calls the drive so it will actually function
     DriveTrain.tankdrive();
   }
 

@@ -100,7 +100,6 @@ public class Robot extends TimedRobot{
   @Override
   public void teleopPeriodic() {
 
-    myDrive.tankDrive(stick.getY(), stick1.getY());
   }
 
   /**

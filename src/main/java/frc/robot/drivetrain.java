@@ -57,7 +57,7 @@ public class drivetrain {
     public void tankdrive()
     {
         v_speedLimiter= joystick.getRawAxis(speedLimiterAxis);
-        left_c = -joystick.getRawAxis(1)/(2-v_speedLimiter);
+        left_c =  joystick.getRawAxis(1)/(2-v_speedLimiter);
         right_c = joystick.getRawAxis(5)/(2-v_speedLimiter);
         MyDrive.tankDrive(left_c, right_c);
     }

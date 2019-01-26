@@ -37,6 +37,7 @@ public class Robot extends TimedRobot{
     Joystick stick; 
     Double rightm; 
     drivetrain DriveTrain;
+   
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -51,18 +52,21 @@ public class Robot extends TimedRobot{
     stick = new Joystick(0); 
     //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
-    //CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture();
     CameraServer.getInstance().startAutomaticCapture(1);
     
-    new Thread(()->{
+    /*new Thread(()->{
       UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
+      //UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
       cam.setResolution(640, 480);
+      //cam1.setResolution(320, 240);
+
 
       CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("720", 640, 480);
+      CvSource outputStream = CameraServer.getInstance().putVideo("Cam", 640, 480);
 
       Mat source = new Mat();
-      Mat output = new Mat();
+    Mat output = new Mat();
 
       while(!Thread.interrupted()){
         cvSink.grabFrame(source);
@@ -70,7 +74,8 @@ public class Robot extends TimedRobot{
         outputStream.putFrame(output);
       } 
 
-    }).start();
+   }).start(); 
+   */
 
   }
 

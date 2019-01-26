@@ -56,17 +56,17 @@ public class Robot extends TimedRobot{
    // CameraServer.getInstance().startAutomaticCapture(1);
     
     new Thread(()->{
-      UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
-      //UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
+      UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("Front",0);
+      UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture("Back",1);
       cam.setResolution(640, 480);
-      //cam1.setResolution(320, 240);
+      cam1.setResolution(320, 240);
 
 
-      CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("Cam", 640, 480);
+      CvSink cvSink = CameraServer.getInstance().getVideo("Font");
+      CvSource outputStream = CameraServer.getInstance().putVideo("Front", 640, 480);
 
       Mat source = new Mat();
-    Mat output = new Mat();
+      Mat output = new Mat();
 
       while(!Thread.interrupted()){
         cvSink.grabFrame(source);

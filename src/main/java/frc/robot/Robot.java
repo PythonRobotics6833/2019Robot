@@ -54,28 +54,37 @@ public class Robot extends TimedRobot{
     DriveTrain= new drivetrain(0,4,1,3,stick);
  //   CameraServer.getInstance().startAutomaticCapture();
    // CameraServer.getInstance().startAutomaticCapture(1);
-    
-    new Thread(()->{
-      UsbCamera cam = CameraServer.getInstance().startAutomaticCapture("Front",0);
-      UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture("Back",1);
-      cam.setResolution(640, 480);
-      cam1.setResolution(320, 240);
+   
+    new Thread(() -> {
+      boolean allowCam1=false;
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Front",0);
+        camera.setResolution(640, 480);
+        UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("back",1);
+        camera1.setResolution(640, 480);
 
-
-      CvSink cvSink = CameraServer.getInstance().getVideo("Font");
-      CvSource outputStream = CameraServer.getInstance().putVideo("Front", 640, 480);
-
-      Mat source = new Mat();
-      Mat output = new Mat();
-
-      while(!Thread.interrupted()){
-       // cvSink.grabFrame(source);
-        //Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-        outputStream.putFrame(output);
-      } 
-
-   }).start(); 
-  
+        CvSink cvSink1 = CameraServer.getInstance().getVideo(camera);
+        CvSink cvSink2= CameraServer.getInstance().getVideo(camera1);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+        
+        Mat image = new Mat();
+        
+        while(!Thread.interrupted()) {
+          if(stick.getRawButton(1)) {
+            allowCam1 = !allowCam1;
+          }
+          
+            if(allowCam1){
+              cvSink2.setEnabled(false);
+              cvSink1.setEnabled(true);
+              cvSink1.grabFrame(image,2);
+            } else{
+              cvSink1.setEnabled(false);
+              cvSink2.setEnabled(true);
+              cvSink2.grabFrame(image, 2);     
+            }
+            outputStream.putFrame(image);
+        }
+    }).start();
    
 
   }

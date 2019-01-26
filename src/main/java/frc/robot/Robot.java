@@ -52,10 +52,10 @@ public class Robot extends TimedRobot{
     stick = new Joystick(0); 
     //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
-    CameraServer.getInstance().startAutomaticCapture();
-    CameraServer.getInstance().startAutomaticCapture(1);
+ //   CameraServer.getInstance().startAutomaticCapture();
+   // CameraServer.getInstance().startAutomaticCapture(1);
     
-    /*new Thread(()->{
+    new Thread(()->{
       UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
       //UsbCamera cam1 = CameraServer.getInstance().startAutomaticCapture(1);
       cam.setResolution(640, 480);
@@ -75,7 +75,7 @@ public class Robot extends TimedRobot{
       } 
 
    }).start(); 
-   */
+   
 
   }
 

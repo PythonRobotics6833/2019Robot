@@ -37,6 +37,7 @@ public class Robot extends TimedRobot{
     Joystick stick; 
     Double rightm; 
     drivetrain DriveTrain;
+    armTake arm; 
    
   /**
    * This function is run when the robot is first started up and should be
@@ -52,6 +53,8 @@ public class Robot extends TimedRobot{
     stick = new Joystick(0); 
     //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
+    arm = new armTake(9, false, 2);
+    
  //   CameraServer.getInstance().startAutomaticCapture();
    // CameraServer.getInstance().startAutomaticCapture(1);
    
@@ -146,6 +149,7 @@ public class Robot extends TimedRobot{
 
     //calls the drive so it will actually function
     DriveTrain.tankdrive();
+    
   }
 
   /**

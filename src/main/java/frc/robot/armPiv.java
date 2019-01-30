@@ -10,32 +10,31 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Joystick;
 /**
  * Add your docs here.
  */
-public class Arm {
+public class armPiv {
     TalonSRX TalonM;
     VictorSPX VictorM; 
     Joystick P2; 
     double speedMotor;
-    double Window;
-    PWMVictorSPX Enclose;
     ControlMode Arm;
-    public Arm(int rightMotor, int leftMotor, int Close, int Joystick){
+    boolean ArmInvert; 
+    public armPiv(int rightMotor, int leftMotor, boolean ArmInvert, int Joystick){
         TalonM = new TalonSRX(rightMotor);
         VictorM = new VictorSPX(rightMotor);
-        Enclose = new PWMVictorSPX(Close);
         
         speedMotor = 0.1;
-        Window = 0.1;       
+        this.ArmInvert = ArmInvert; 
     }
-    public void speed(double speedMotor){
+  
+    public void ArmPiv(double speedMotor){
         TalonM.set(Arm, speedMotor); 
         VictorM.follow(TalonM); 
-        Enclose.set(Window);
+        
     
+
     }
 
 }

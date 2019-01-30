@@ -6,9 +6,33 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Add your docs here.
  */
-public class ButterFlyLift {
-}
+public class ButterFlyLift
+ {
+     TalonSRX Bottom;  
+     TalonSRX Middle;
+     double speedBot;
+     double speedMid;
+     ControlMode Up;
+     Joystick Player2;  
+    public ButterFlyLift(int Talon1, int Talon2){
+        Bottom = new TalonSRX(Talon1);
+        Middle = new TalonSRX(Talon2);
+        
+        speedBot = 0.1;
+        speedMid = 0.1; 
+                                                }
+
+    public void speed (double speedBot, double speedMid){
+        Bottom.set(Up, speedBot);
+        Middle.set(Up, speedMid);
+
+                                                        }
+    }

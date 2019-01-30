@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
+
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -64,12 +64,12 @@ public class Robot extends TimedRobot{
 
         CvSink cvSink1 = CameraServer.getInstance().getVideo(camera);
         CvSink cvSink2= CameraServer.getInstance().getVideo(camera1);
-        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 160, 120);
         
         Mat image = new Mat();
         
         while(!Thread.interrupted()) {
-          if(stick.getRawButton(1)) {
+          if(stick.getRawButton(3)) {
             allowCam1 = !allowCam1;
           }
           

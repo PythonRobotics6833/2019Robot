@@ -35,9 +35,10 @@ public class Robot extends TimedRobot{
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   */
+
+  //makes the variables 
     Joystick stick; 
     Joystick armController; 
-    Double rightm; 
     drivetrain DriveTrain;
     armTake arm; 
    
@@ -56,6 +57,7 @@ public class Robot extends TimedRobot{
     armController= new Joystick(1);
     //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
+    //arm sets the input of the motor and start for the boolean
     arm = new armTake(9, false );
 
     
@@ -154,7 +156,7 @@ public class Robot extends TimedRobot{
     //calls the drive so it will actually function
     
     boolean Break = stick.getRawButton(8);
-    boolean hold= armController.getRawButton(1);
+    boolean hold= armController.getRawButton(3);
     if (!Break){
 
       DriveTrain.tankdrive();
@@ -165,9 +167,16 @@ public class Robot extends TimedRobot{
       {
         arm.holdPossition(true); 
       }
-      else {
+      else 
+      {
 				arm.Controlling(armController);
-    }}
+      }
+                 } 
+		else
+		{
+            DriveTrain.tankdrive();
+    }
+  
 
     
 

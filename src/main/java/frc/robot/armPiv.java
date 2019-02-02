@@ -10,14 +10,12 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.Joystick;
 /**
  * Add your docs here.
  */
 public class armPiv {
     TalonSRX TalonM;
     VictorSPX VictorM; 
-    Joystick P2; 
     double speedMotor;
     ControlMode Arm;
     boolean ArmInvert; 

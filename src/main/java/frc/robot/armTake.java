@@ -7,10 +7,12 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-
+import edu.wpi.first.wpilibj.Joystick;
 /**
  * Add your docs here.
  */
+//make a button boolean 
+//
 public class armTake {
     double Window;
     PWMVictorSPX Enclose; 
@@ -50,22 +52,22 @@ public class armTake {
           Enclose.set(0.0);
           }
       }
-    public void ArmTake(double speedMotor, double ran){
+    public void speed(double speedMotor){
 
     Enclose.set(Window);
     
 
     }
-    public void ArmTake(double Controller)
+   /* public void Controlling(double Controller)
   {
-    double inputSqd=(Controller*Controller);
+    double input=(Controller*Controller);
     if(Controller<0)
     {
-      Enclose.set(Window*inputSqd);
+      Enclose.set(Window*input);
     }
     else if (Controller>0)
     {
-      Enclose.set(Window*inputSqd);
+      Enclose.set(Window*input);
       
     }
     else
@@ -73,7 +75,36 @@ public class armTake {
       Enclose.set(0.0);
      
     }
+  } */
+    public void holdPossition (boolean hold)
+    {
+      if(hold) {
+        Enclose.set(-.195);
+        
+      }
+      else
+        {
+          Enclose.set(0);
+         } 
+    }
+    public void Controlling(Joystick stick2)
+    {
+      if(stick2.getRawAxis(1) < -0.5)
+      {
+        Enclose.set(-Window);
+      }
+      else if(stick2.getRawAxis(1)>0.5)
+      {
+        Enclose.set(Window);
+      }
+      else
+        {
+          Enclose.set(0);
+        }
+  
+      }
+    
   }
 
-}
+
 

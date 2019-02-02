@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 
 import org.opencv.core.Mat;
 
-
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Joystick;
+
 
 
 /**
@@ -152,9 +152,24 @@ public class Robot extends TimedRobot{
   public void teleopPeriodic() {
 
     //calls the drive so it will actually function
-    DriveTrain.tankdrive();
-    double armInput= armController.getRawAxis(3) -armController.getRawAxis(2);
-				arm.ArmTake(armInput, 0.0);
+    
+    boolean Break = stick.getRawButton(8);
+    boolean hold= armController.getRawButton(1);
+    if (!Break){
+
+      DriveTrain.tankdrive();
+
+      double armInput= armController.getRawAxis(3) -armController.getRawAxis(2);
+      arm.speed(armInput);
+      if (hold)
+      {
+        arm.holdPossition(true); 
+      }
+      else {
+				arm.Controlling(armController);
+    }}
+
+    
 
   }
 

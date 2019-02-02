@@ -6,20 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * Add your docs here.
  */
 public class armTake {
-    Joystick P2;
     double Window;
-    PWMVictorSPX Enclose;
-    ControlMode Arm; 
+    PWMVictorSPX Enclose; 
     boolean CloseInvert;
-    public armTake(int Close, boolean CloseInvert, int Joystick){
+    public armTake(int Close, boolean CloseInvert){
         Enclose = new PWMVictorSPX(Close);
         Window = 0.1;       
         this.CloseInvert = CloseInvert;  
@@ -54,12 +50,30 @@ public class armTake {
           Enclose.set(0.0);
           }
       }
-    public void ArmTake(double speedMotor){
+    public void ArmTake(double speedMotor, double ran){
 
     Enclose.set(Window);
     
 
     }
+    public void ArmTake(double Controller)
+  {
+    double inputSqd=(Controller*Controller);
+    if(Controller<0)
+    {
+      Enclose.set(Window*inputSqd);
+    }
+    else if (Controller>0)
+    {
+      Enclose.set(Window*inputSqd);
+      
+    }
+    else
+    {
+      Enclose.set(0.0);
+     
+    }
+  }
 
 }
 

@@ -20,6 +20,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot{
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   */
     Joystick stick; 
+    Joystick armController; 
     Double rightm; 
     drivetrain DriveTrain;
     armTake arm; 
@@ -51,9 +53,11 @@ public class Robot extends TimedRobot{
 
 
     stick = new Joystick(0); 
+    armController= new Joystick(1);
     //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
-    arm = new armTake(9, false, 2);
+    arm = new armTake(9, false );
+
     
  //   CameraServer.getInstance().startAutomaticCapture();
    // CameraServer.getInstance().startAutomaticCapture(1);
@@ -149,7 +153,9 @@ public class Robot extends TimedRobot{
 
     //calls the drive so it will actually function
     DriveTrain.tankdrive();
-    
+    double armInput= armController.getRawAxis(3) -armController.getRawAxis(2);
+				arm.ArmTake(armInput, 0.0);
+
   }
 
   /**

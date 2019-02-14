@@ -8,6 +8,7 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * Add your docs here.
  */
@@ -17,14 +18,15 @@ public class armTake {
     double Window;
     PWMVictorSPX Enclose; 
     boolean CloseInvert;
+    Joystick stick; 
     public armTake(int Close, boolean CloseInvert){
         Enclose = new PWMVictorSPX(Close);
         Window = 0.1;       
         this.CloseInvert = CloseInvert;  
 
     }
-    public void ArmTake(boolean In, boolean Out) {
-        if (In)
+    public void ArmTake() {
+        if (stick.getRawButtonPressed(2))
         {
           if (CloseInvert)
           {
@@ -36,7 +38,7 @@ public class armTake {
             }
     
         }
-        else if (Out)
+        else if (stick.getRawButtonPressed(3))
         {
           if (CloseInvert)
           {

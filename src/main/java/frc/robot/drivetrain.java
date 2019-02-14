@@ -57,7 +57,7 @@ public class drivetrain {
     }
     public void tankdrive()
     {   
-        //Joystick raw axis is right bumper foe Logitech
+        //Joystick raw axis is right bumper for Logitech
         v_speedLimiter= joystick.getRawAxis(speedLimiterAxis);
         //1 is the left stick value 
         left_c =  joystick.getRawAxis(1)/(2-v_speedLimiter);
@@ -67,5 +67,14 @@ public class drivetrain {
         MyDrive.tankDrive(left_c, right_c);
         //the speed limiter halfs the speed unless pushed by "right bumper"
     }
+    public void tankDrive2()
+    {
+        
+         v_speedLimiter= joystick.getRawAxis(speedLimiterAxis);
+         left_c =  joystick.getRawAxis(1)/(2-v_speedLimiter);
+         right_c = joystick.getRawAxis(5)/(2-v_speedLimiter);
+         //makes it single stick drive, it still needs the variables 
+        MyDrive.tankDrive(right_c, right_c);
+    }
 
-}
+}   

@@ -154,12 +154,22 @@ public class Robot extends TimedRobot{
   public void teleopPeriodic() {
 
     //calls the drive so it will actually function
-    
+   
     boolean Break = stick.getRawButton(8);
-    boolean hold= armController.getRawButton(3);
+    boolean hold = armController.getRawButton(3);
+    boolean Climb = stick.getRawButton(5);
+
+    if (Climb==stick.getRawButtonPressed(5))
+    {
+      DriveTrain.tankDrive2();
+    }
+    if(Climb =! stick.getRawButtonPressed(5))
+    {
+      DriveTrain.tankdrive();
+    }
     if (!Break){
 
-      DriveTrain.tankdrive();
+      
 
       double armInput= armController.getRawAxis(3) -armController.getRawAxis(2);
       arm.speed(armInput);
@@ -167,15 +177,13 @@ public class Robot extends TimedRobot{
       {
         arm.holdPossition(true); 
       }
-      else 
+      else if(hold == false)
       {
 				arm.Controlling(armController);
       }
                  } 
-		else
-		{
-            DriveTrain.tankdrive();
-    }
+  
+              
   
 
     

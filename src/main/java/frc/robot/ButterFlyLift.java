@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.DigitalInput;
 /**
  * Add your docs here.
  */
@@ -19,11 +18,14 @@ public class ButterFlyLift
      TalonSRX Bottom;  
      TalonSRX Middle;
      double armSpeed=0.5;
-     Joystick Player2; 
-     VictorSP armMotor; 
+     Joystick Player2;
+     
+    // The victor that controls the linear actuator
+    VictorSP armMotor; 
 
     boolean CargoHeight;
 
+    //These variables hold the bool values for the buttons
     boolean lowLevelButton;
     boolean midLevelButton;
     boolean highLevelButton;
@@ -35,6 +37,9 @@ public class ButterFlyLift
     int heightLevel;
     //This is the variable that the encoder value is stored in
     double encoder;
+    //This is the actuall encoder(that is really not an encoder)
+    AnalogPotentiometer liftEncoder;
+
     //this is added and subtracted to the encoder position values to give it a range in which it will stop instead of an exact value
     double deadZone;
     //These two varaibles will be filled with the ecoder posision that is required to be at a certain height.
@@ -43,8 +48,7 @@ public class ButterFlyLift
     Double highLevelEncoderV;
     //This is the value added to the encoder position so the arm can find its position and is constant
     Double cargoHeightEncoderV;
-
-    AnalogPotentiometer liftEncoder;
+    
     //Constructor for Talons
     public ButterFlyLift(int Talon1, int Talon2)
     {
@@ -79,7 +83,8 @@ public class ButterFlyLift
 
         encoder=liftEncoder.get();
         double offset;
-        
+        //testing consistancy code
+        //System.out.println(offset);
         if(fineHeight>=0.5)
         {
             CargoHeight=true;
@@ -130,7 +135,9 @@ public class ButterFlyLift
     //This method is used to actuate the arm to its position by using the encoder as its guide
     private void setLevel(int level, double offset)
     {
-        if(level ==0)
+        //testing consistancy code
+        //System.out.println(offset);
+        if(level == 0)
         {
             if(encoder<(lowLevelEncoderV+deadZone+offset))
             {

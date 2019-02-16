@@ -40,6 +40,7 @@ public class Robot extends TimedRobot{
     Joystick stick; 
     Joystick armController; 
     drivetrain DriveTrain;
+    ButterFlyLift lift;
     armTake arm; 
    
   /**
@@ -59,6 +60,7 @@ public class Robot extends TimedRobot{
     DriveTrain= new drivetrain(0,4,1,3,stick);
     //arm sets the input of the motor and start for the boolean
     arm = new armTake(9, false );
+    lift=new ButterFlyLift(8, armController);
 
     
  //   CameraServer.getInstance().startAutomaticCapture();
@@ -181,12 +183,12 @@ public class Robot extends TimedRobot{
       {
 				arm.Controlling(armController);
       }
-                 } 
+      } 
   
               
   
 
-    
+    lift.analogMove();
 
   }
 

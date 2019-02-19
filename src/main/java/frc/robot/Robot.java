@@ -37,12 +37,13 @@ public class Robot extends TimedRobot{
   */
 
   //makes the variables 
-    Joystick stick; 
-    Joystick Controller2; 
-    drivetrain DriveTrain;
-    Intake arm; 
-   Climber Climb; 
-   ButterFlyLift lift; 
+  Joystick stick; 
+  Joystick Controller2; 
+  drivetrain DriveTrain;
+  Intake arm; 
+  Climber Climb; 
+  ButterFlyLift lift; 
+  Tilt tilt;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -62,7 +63,7 @@ public class Robot extends TimedRobot{
     arm = new Intake(9, false );
     Climb = new Climber (9, stick);
     lift = new ButterFlyLift(8, Controller2);
-
+    tilt = new Tilt(7, Controller2);
 
     
  //   CameraServer.getInstance().startAutomaticCapture();
@@ -163,6 +164,7 @@ public class Robot extends TimedRobot{
     boolean hold = Controller2.getRawButton(4);
     boolean ClimbSwitch = stick.getRawButton(5);
     lift.analogMove();
+    tilt.tiltController();
     if (ClimbSwitch==stick.getRawButtonPressed(5))
     {
       DriveTrain.tankDrive2();

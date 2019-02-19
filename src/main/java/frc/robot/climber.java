@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 /**
  * Add your docs here.
  */
-public class climber {
+public class Climber {
 
     PWMVictorSPX ClimbMotor; 
     Joystick joystick;
@@ -22,19 +22,16 @@ public class climber {
 
 
     
-    public climber(int VictorMotorLeft1, Joystick ClimbStick)
+    public Climber(int VictorMotorLeft1, Joystick ClimbStick)
     {
         
         joystick=ClimbStick;
         ClimbMotor=new PWMVictorSPX(VictorMotorLeft1);
-        MotorSpeed = .01; 
-       
-       
        
     }
     public void ClimbCon(){ 
           {
-            
+            ClimbMotor.setSpeed(-joystick.getRawAxis(1));
           }
     }
 

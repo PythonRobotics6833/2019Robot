@@ -14,12 +14,13 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 //make a button boolean 
 //
-public class armTake {
+public class Intake {
     double Window;
     PWMVictorSPX Enclose; 
     boolean CloseInvert;
     Joystick stick; 
-    public armTake(int Close, boolean CloseInvert){
+    
+  public Intake(int Close, boolean CloseInvert){
         Enclose = new PWMVictorSPX(Close);
         Window = 0.1;       
         this.CloseInvert = CloseInvert;  

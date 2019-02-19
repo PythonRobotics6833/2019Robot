@@ -38,11 +38,11 @@ public class Robot extends TimedRobot{
 
   //makes the variables 
     Joystick stick; 
-    Joystick armController; 
+    Joystick Controller2; 
     drivetrain DriveTrain;
-    ButterFlyLift lift;
-    armTake arm; 
-   
+    Intake arm; 
+   Climber Climb; 
+   ButterFlyLift lift; 
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -55,12 +55,14 @@ public class Robot extends TimedRobot{
 
 
     stick = new Joystick(0); 
-    armController= new Joystick(1);
+    Controller2= new Joystick(1);
     //DriveTrain sets up your ports 
     DriveTrain= new drivetrain(0,4,1,3,stick);
     //arm sets the input of the motor and start for the boolean
-    arm = new armTake(9, false );
-    lift=new ButterFlyLift(8, armController);
+    arm = new Intake(9, false );
+    Climb = new Climber (9, stick);
+    lift = new ButterFlyLift(8, Controller2);
+
 
     
  //   CameraServer.getInstance().startAutomaticCapture();
@@ -158,14 +160,16 @@ public class Robot extends TimedRobot{
     //calls the drive so it will actually function
    
     boolean Break = stick.getRawButton(8);
-    boolean hold = armController.getRawButton(3);
-    boolean Climb = stick.getRawButton(5);
-
-    if (Climb==stick.getRawButtonPressed(5))
+    boolean hold = Controller2.getRawButton(4);
+    boolean ClimbSwitch = stick.getRawButton(5);
+    lift.analogMove();
+    if (ClimbSwitch==stick.getRawButtonPressed(5))
     {
       DriveTrain.tankDrive2();
+      Climb.ClimbCon();
+
     }
-    if(Climb =! stick.getRawButtonPressed(5))
+    if(ClimbSwitch =! stick.getRawButtonPressed(5))
     {
       DriveTrain.tankdrive();
     }
@@ -173,7 +177,7 @@ public class Robot extends TimedRobot{
 
       
 
-      double armInput= armController.getRawAxis(3) -armController.getRawAxis(2);
+      double armInput= Controller2.getRawAxis(3) -Controller2.getRawAxis(2);
       arm.speed(armInput);
       if (hold)
       {
@@ -181,14 +185,14 @@ public class Robot extends TimedRobot{
       }
       else if(hold == false)
       {
-				arm.Controlling(armController);
+				arm.Controlling(Controller2);
       }
-      } 
+                 } 
   
               
   
 
-    lift.analogMove();
+    
 
   }
 

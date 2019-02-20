@@ -58,18 +58,18 @@ public class Robot extends TimedRobot{
     stick = new Joystick(0); 
     Controller2= new Joystick(1);
     //DriveTrain sets up your ports 
-    DriveTrain= new drivetrain(0,4,1,3,stick);
+     DriveTrain= new drivetrain(0,1,2,3 ,stick);
     //arm sets the input of the motor and start for the boolean
-    arm = new Intake(9, false );
-    Climb = new Climber (9, stick);
-    lift = new ButterFlyLift(8, Controller2);
-    tilt = new Tilt(7, Controller2);
+    arm = new Intake(8, Controller2);
+    Climb = new Climber (5, stick);
+    lift = new ButterFlyLift(6, Controller2);
+    tilt = new Tilt(9, Controller2);
 
     
  //   CameraServer.getInstance().startAutomaticCapture();
    // CameraServer.getInstance().startAutomaticCapture(1);
    
-    new Thread(() -> {
+   /* new Thread(() -> {
       boolean allowCam1=false;
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Front",0);
         camera.setResolution(640, 480);
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot{
             }
             outputStream.putFrame(image);
         }
-    }).start();
+    }).start(); */
    
 
   }
@@ -159,23 +159,26 @@ public class Robot extends TimedRobot{
   public void teleopPeriodic() {
 
     //calls the drive so it will actually function
-   
+   DriveTrain.tankdrive();
     boolean Break = stick.getRawButton(8);
     boolean hold = Controller2.getRawButton(4);
     boolean ClimbSwitch = stick.getRawButton(5);
     lift.analogMove();
-    tilt.tiltController();
-    if (ClimbSwitch==stick.getRawButtonPressed(5))
+    tilt.chainThing();
+    //arm.ArmTake();
+   // tilt.tiltController();
+  /* if (ClimbSwitch==stick.getRawButton(5))
     {
       DriveTrain.tankDrive2();
-      Climb.ClimbCon();
+      Climb.climbCon();
 
     }
-    if(ClimbSwitch =! stick.getRawButtonPressed(5))
+    if(ClimbSwitch =! stick.getRawButton(5))
     {
       DriveTrain.tankdrive();
     }
-    if (!Break){
+    */
+   /* if (!Break){
 
       
 
@@ -188,9 +191,9 @@ public class Robot extends TimedRobot{
       else if(hold == false)
       {
 				arm.Controlling(Controller2);
-      }
+      } 
                  } 
-  
+  */
               
   
 

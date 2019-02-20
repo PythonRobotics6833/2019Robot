@@ -45,13 +45,14 @@ public class drivetrain {
         Motor3=new PWMVictorSPX(VictorMotorRight1);
         Motor4=new PWMVictorSPX(VictorMotorRight2);
         //Inverts Motors, they usually go backwards...
-        Motor1.setInverted(true);
+        Motor1.setInverted(false);
         Motor2.setInverted(false);
-        Motor3.setInverted(true);
+        Motor3.setInverted(false);
         Motor4.setInverted(false);
         //SpeedGroups to make a 4 Motor drive, can be used with 6, does not need it if only using 2 motors 
-        SpeedControllerGroup rightSpeedGroup = new SpeedControllerGroup(Motor3,Motor4);
         SpeedControllerGroup leftSpeedGroup = new SpeedControllerGroup(Motor1, Motor2); 
+        SpeedControllerGroup rightSpeedGroup = new SpeedControllerGroup(Motor3,Motor4);
+        
         //attatches the Speedgroups to the variable for the DriveTrain
         MyDrive= new DifferentialDrive(leftSpeedGroup, rightSpeedGroup);
     }
@@ -60,9 +61,9 @@ public class drivetrain {
         //Joystick raw axis is right bumper for Logitech
         v_speedLimiter= joystick.getRawAxis(speedLimiterAxis);
         //1 is the left stick value 
-        left_c =  joystick.getRawAxis(1)/(2-v_speedLimiter);
+        left_c =  -joystick.getRawAxis(1)/(2-v_speedLimiter);
         //5 is the right stick value
-        right_c = joystick.getRawAxis(5)/(2-v_speedLimiter);
+        right_c = -joystick.getRawAxis(5)/(2-v_speedLimiter);
         //attaches the limiters to the controls 
         MyDrive.tankDrive(left_c, right_c);
         //the speed limiter halfs the speed unless pushed by "right bumper"
@@ -71,8 +72,7 @@ public class drivetrain {
     {
         
          v_speedLimiter= joystick.getRawAxis(speedLimiterAxis);
-         left_c =  joystick.getRawAxis(1)/(2-v_speedLimiter);
-         right_c = joystick.getRawAxis(5)/(2-v_speedLimiter);
+         right_c = -joystick.getRawAxis(5)/(2-v_speedLimiter);
          //makes it single stick drive, it still needs the variables 
         MyDrive.tankDrive(right_c, right_c);
     }

@@ -29,7 +29,7 @@ public class Climber {
         ClimbMotor=new PWMVictorSPX(VictorMotorLeft1);
        
     }
-    public void ClimbCon(){ 
+    public void climbCon(){ 
           {
             ClimbMotor.setSpeed(-joystick.getRawAxis(1));
           }

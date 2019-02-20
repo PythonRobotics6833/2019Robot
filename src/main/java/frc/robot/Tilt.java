@@ -16,12 +16,12 @@ public class Tilt {
 Joystick rightStick;
 PWMVictorSPX victor1;
 double speed;
-int speedLimiter = 2;
+double speedLimiter = 1.5;
 
 public Tilt(int victor2, Joystick stick){
 victor1 = new PWMVictorSPX(victor2);
 this.rightStick = stick;
-speed = 0.01;
+speed = 0.1;
 }
 
 public void chainThing(){
@@ -31,17 +31,16 @@ victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
 public void tiltController(){
 
     if(rightStick.getRawAxis(5) > 0){
-        victor1.setSpeed(speed/speedLimiter);
+        victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
     }
     else if(rightStick.getRawAxis(5) == 0);{
-        victor1.setSpeed(0);
+       { victor1.setSpeed(0);
     }
     if(rightStick.getRawAxis(5) < 0){
-        victor1.setSpeed((-speed)/speedLimiter);
+        victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
     }
 
     }
     
-}
+}}
 
-}

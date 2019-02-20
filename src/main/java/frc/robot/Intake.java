@@ -20,41 +20,30 @@ public class Intake {
     boolean CloseInvert;
     Joystick stick; 
     
-  public Intake(int Close, boolean CloseInvert){
+  public Intake(int Close, Joystick stick1){
         Enclose = new PWMVictorSPX(Close);
         Window = 0.1;       
-        this.CloseInvert = CloseInvert;  
+         this.stick=stick1;
 
     }
     public void ArmTake() {
-        if (stick.getRawButtonPressed(2))
+        if (stick.getRawButton(5))
         {
-          if (CloseInvert)
-          {
+
             Enclose.set(Window);
           }
-          else
+          else if(stick.getRawButton(6))
             {
             Enclose.set(-Window);
             }
-    
-        }
-        else if (stick.getRawButtonPressed(3))
-        {
-          if (CloseInvert)
-          {
-            Enclose.set(-Window);
-          }
-          else
-            {
-            Enclose.set(Window);
-            } 
-        }
-        else
-          {
-          Enclose.set(0.0);
-          }
-      }
+    else 
+    {
+      Enclose.set(0.0);
+    }
+       
+         
+       }
+      
     public void speed(double speedMotor){
 
     Enclose.set(Window);
@@ -106,7 +95,10 @@ public class Intake {
         }
   
       }
-    
+    public void ConAxis(){
+      Enclose.setSpeed(stick.getRawAxis(5)/2);
+
+    }
   }
 
 

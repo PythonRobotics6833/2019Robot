@@ -18,17 +18,21 @@ PWMVictorSPX victor1;
 double speed;
 double speedLimiter = 1.5;
 
-public Tilt(int victor2, Joystick stick){
-victor1 = new PWMVictorSPX(victor2);
-this.rightStick = stick;
-speed = 0.1;
+public Tilt(int victor2, Joystick stick)
+{
+    victor1 = new PWMVictorSPX(victor2);
+    this.rightStick = stick;
+    speed = 0.1;
 }
+//works better, uses the right stick 
+public void stickMove()
+{
 
-public void chainThing(){
 victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
 }
-
-public void tiltController(){
+//doesnt work 
+public void tiltController()
+{
 
     if(rightStick.getRawAxis(5) > 0){
         victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
@@ -41,6 +45,6 @@ public void tiltController(){
     }
 
     }
-    
-}}
+}
+}
 

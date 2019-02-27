@@ -14,23 +14,20 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * Add your docs here.
  */
 public class Climber {
-
+    //Variables 
     PWMVictorSPX ClimbMotor; 
     Joystick joystick;
     double MotorSpeed;
-    Button On; 
 
-
-    
     public Climber(int VictorMotorLeft1, Joystick ClimbStick)
     {
-        
+        //setups them up to be called by the int
         joystick=ClimbStick;
         ClimbMotor=new PWMVictorSPX(VictorMotorLeft1);
-       
     }
     public void climbCon(){ 
           {
+              //Binds the left joystick to moving the climber
             ClimbMotor.setSpeed(-joystick.getRawAxis(1));
           }
     }

@@ -79,6 +79,7 @@ public class Intake {
           Enclose.set(0);
          } 
     }
+    //was being setup to move based on a button
     public void Controlling(Joystick stick2)
     {
       if(stick2.getRawAxis(1) < -0.5)
@@ -95,9 +96,11 @@ public class Intake {
         }
   
       }
+      //moves the window motor using the bumpers on the controllers
     public void ConAxis(){
-      Enclose.setSpeed(stick.getRawAxis(5)/2);
 
+      Enclose.setSpeed(stick.getRawAxis(3)/2);
+      Enclose.setSpeed(-stick.getRawAxis(2)/2);
     }
   }
 

@@ -16,8 +16,8 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
@@ -29,21 +29,18 @@ import edu.wpi.first.cameraserver.CameraServer;
  * project.
  */
 public class Robot extends TimedRobot{
-  /*
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  */
-
   //makes the variables 
-  Joystick stick; 
-  Joystick Controller2; 
-  drivetrain DriveTrain;
-  Intake arm; 
-  Climber Climb; 
-  ButterFlyLift lift; 
-  Tilt tilt;
+   Joystick stick;
+   Joystick Controller2; 
+   drivetrain DriveTrain;
+   Intake arm; 
+   Climber Climb; 
+   ButterFlyLift lift; 
+   Tilt tilt;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -66,11 +63,11 @@ public class Robot extends TimedRobot{
     tilt = new Tilt(9, Controller2);
 
     
- //   CameraServer.getInstance().startAutomaticCapture();
-   // CameraServer.getInstance().startAutomaticCapture(1);
+     CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture(1);
    
-   /* new Thread(() -> {
-      boolean allowCam1=false;
+    new Thread(() -> {
+        boolean allowCam1=false;
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Front",0);
         camera.setResolution(640, 480);
         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("back",1);
@@ -98,12 +95,11 @@ public class Robot extends TimedRobot{
             }
             outputStream.putFrame(image);
         }
-    }).start(); */
+    }).start(); 
    
 
   }
-
-  /**
+    /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
    * autonomous, teleoperated and test.
@@ -156,29 +152,31 @@ public class Robot extends TimedRobot{
    * This function is called periodically during operator control.
    */
   @Override
-  public void teleopPeriodic() {
+  public void teleopPeriodic() 
+  {
 
     //calls the drive so it will actually function
    DriveTrain.tankdrive();
-    boolean Break = stick.getRawButton(8);
-    boolean hold = Controller2.getRawButton(4);
-    boolean ClimbSwitch = stick.getRawButton(5);
+   // boolean Break = stick.getRawButton(8);
+   //boolean hold = Controller2.getRawButton(4);
+   //boolean ClimbSwitch = stick.getRawButton(5);
     lift.analogMove();
-    tilt.chainThing();
+    tilt.stickMove();
+    arm.ConAxis(); 
     //arm.ArmTake();
-   // tilt.tiltController();
-  /* if (ClimbSwitch==stick.getRawButton(5))
-    {
+    // tilt.tiltController();
+  /*  if (ClimbSwitch==stick.getRawButton(5))
+     {
       DriveTrain.tankDrive2();
       Climb.climbCon();
-
-    }
+     }
     if(ClimbSwitch =! stick.getRawButton(5))
-    {
+     {
       DriveTrain.tankdrive();
-    }
-    */
-   /* if (!Break){
+     }
+    
+    if (!Break)
+    {
 
       
 
@@ -192,16 +190,9 @@ public class Robot extends TimedRobot{
       {
 				arm.Controlling(Controller2);
       } 
-                 } 
-  */
-              
-  
-
-    
-
+    } */
   }
-
-  /**
+    /**
    * This function is called periodically during test mode.
    */
   @Override

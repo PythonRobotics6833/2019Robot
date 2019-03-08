@@ -15,92 +15,33 @@ import edu.wpi.first.wpilibj.Joystick;
 //make a button boolean 
 //
 public class Intake {
-    double Window;
-    PWMVictorSPX Enclose; 
-    boolean CloseInvert;
+    double WindowSpeed;
+    PWMVictorSPX WindowMotor;
     Joystick stick; 
     
   public Intake(int Close, Joystick stick1){
-        Enclose = new PWMVictorSPX(Close);
-        Window = 0.1;       
+        WindowMotor = new PWMVictorSPX(Close);
+        WindowSpeed = 1;       
          this.stick=stick1;
-
-    }
-    public void ArmTake() {
-        if (stick.getRawButton(5))
-        {
-
-            Enclose.set(Window);
-          }
-          else if(stick.getRawButton(6))
-            {
-            Enclose.set(-Window);
-            }
-    else 
-    {
-      Enclose.set(0.0);
-    }
-       
-         
-       }
-      
-    public void speed(double speedMotor){
-
-    Enclose.set(Window);
     
+    }
 
-    }
-   /* public void Controlling(double Controller)
-  {
-    double input=(Controller*Controller);
-    if(Controller<0)
-    {
-      Enclose.set(Window*input);
-    }
-    else if (Controller>0)
-    {
-      Enclose.set(Window*input);
-      
-    }
-    else
-    {
-      Enclose.set(0.0);
-     
-    }
-  } */
-    public void holdPossition (boolean hold)
-    {
-      if(hold) {
-        Enclose.set(-.195);
-        
+    //moves the window motor using the bumpers on the controllers
+    public void ControllerAxis(){
+
+      if(stick.getRawAxis(3) > 0){
+            WindowMotor.set(WindowSpeed);
       }
-      else
-        {
-          Enclose.set(0);
-         } 
-    }
-    //was being setup to move based on a button
-    public void Controlling(Joystick stick2)
-    {
-      if(stick2.getRawAxis(1) < -0.5)
-      {
-        Enclose.set(-Window);
-      }
-      else if(stick2.getRawAxis(1)>0.5)
-      {
-        Enclose.set(Window);
-      }
-      else
-        {
-          Enclose.set(0);
-        }
   
+      if(stick.getRawAxis(2) > 0){
+         WindowMotor.set(-WindowSpeed);
       }
-      //moves the window motor using the bumpers on the controllers
-    public void ConAxis(){
+      else if(stick.getRawAxis(2) == 0 && stick.getRawAxis(3) == 0)
+      {
+      
+        WindowMotor.set(0.0);
+      }
 
-      Enclose.setSpeed(stick.getRawAxis(3)/2);
-      Enclose.setSpeed(-stick.getRawAxis(2)/2);
     }
   }
 

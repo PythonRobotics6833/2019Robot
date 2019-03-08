@@ -70,7 +70,7 @@ public class ButterFlyLift
     //Call this method in order to manually move th arm based on the joystick
     public void analogMove()
     {
-        armMotor.setSpeed(-Player2.getRawAxis(1)/4);
+        armMotor.setSpeed(-Player2.getRawAxis(1)/3);
     }
     //This uses the controller to set the arm to direct positions on the robot
     public void digitalMove()

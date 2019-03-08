@@ -62,7 +62,7 @@ public class Robot extends TimedRobot{
     lift = new ButterFlyLift(6, Controller2);
     tilt = new Tilt(9, Controller2);
 
-    
+    /*
      CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
    
@@ -97,7 +97,7 @@ public class Robot extends TimedRobot{
         }
     }).start(); 
    
-
+*/
   }
     /**
    * This function is called every robot packet, no matter the mode. Use
@@ -156,41 +156,24 @@ public class Robot extends TimedRobot{
   {
 
     //calls the drive so it will actually function
-   DriveTrain.tankdrive();
-   // boolean Break = stick.getRawButton(8);
-   //boolean hold = Controller2.getRawButton(4);
-   //boolean ClimbSwitch = stick.getRawButton(5);
+   //DriveTrain.tankdrive();
+   boolean DriveSwitch = stick.getRawButton(5);
     lift.analogMove();
+    //tilt.tiltController();
     tilt.stickMove();
-    arm.ConAxis(); 
-    //arm.ArmTake();
-    // tilt.tiltController();
-  /*  if (ClimbSwitch==stick.getRawButton(5))
+    arm.ControllerAxis(); 
+   // arm.ConAxisIn();
+   if (DriveSwitch == true)
      {
       DriveTrain.tankDrive2();
       Climb.climbCon();
      }
-    if(ClimbSwitch =! stick.getRawButton(5))
+    else if (DriveSwitch =! stick.getRawButton(5))
      {
       DriveTrain.tankdrive();
      }
     
-    if (!Break)
-    {
-
-      
-
-      double armInput= Controller2.getRawAxis(3) -Controller2.getRawAxis(2);
-      arm.speed(armInput);
-      if (hold)
-      {
-        arm.holdPossition(true); 
-      }
-      else if(hold == false)
-      {
-				arm.Controlling(Controller2);
-      } 
-    } */
+   
   }
     /**
    * This function is called periodically during test mode.

@@ -16,6 +16,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import org.opencv.imgproc.Imgproc;
 /*import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 */
@@ -62,20 +63,22 @@ public class Robot extends TimedRobot{
     tilt = new Tilt(9, Controller2);
 
     //Old/Not Complicated Camera Setup
-    // CameraServer.getInstance().startAutomaticCapture(0);
-    //CameraServer.getInstance().startAutomaticCapture(1);
+  // CameraServer.getInstance().startAutomaticCapture(0);
+ //   CameraServer.getInstance().startAutomaticCapture(1);
 
    //only have the thread or the above, not both
+
+   
     new Thread(() -> {
       boolean allowCam1=false;
-        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Front",0);
-        camera.setResolution(160, 120);
-        UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("back",1);
-        camera1.setResolution(160, 120);
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Cam1",0);
+        camera.setResolution(640, 320);
+        UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("Cam2",1);
+        camera1.setResolution(320, 240);
 
         CvSink cvSink1 = CameraServer.getInstance().getVideo(camera);
         CvSink cvSink2= CameraServer.getInstance().getVideo(camera1);
-        CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 160, 120);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Both", 640, 320);
 
         Mat image = new Mat();
 
@@ -96,6 +99,8 @@ public class Robot extends TimedRobot{
             outputStream.putFrame(image);
         }
     }).start(); 
+   
+    
   }
     /**
    * This function is called every robot packet, no matter the mode. Use

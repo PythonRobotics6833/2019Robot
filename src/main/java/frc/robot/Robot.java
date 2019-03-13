@@ -152,17 +152,22 @@ public class Robot extends TimedRobot{
   @Override
   public void teleopPeriodic() 
   {
-
-    //calls the drive so it will actually function
+    //this space calls it to function 
+  
+   //this one is for regular drive
    //DriveTrain.tankdrive();
+   //this boolean is for switching between one stick and two stick drive 
    boolean DriveSwitch = stick.getRawButton(5);
+    //moving the arm with a stick
     lift.analogMove();
-    //tilt.tiltController();
+    //moves the tilt on a stick 
     tilt.stickMove();
+    //Moves the the latch based on left and right bumpers 
     arm.ControllerAxis(); 
-   // arm.ConAxisIn();
+    //the if to switcing to driving and climbing 
    if (DriveSwitch == true)
      {
+       //tankDrive2 is the one stick drive (only forward and back)
       DriveTrain.tankDrive2();
       Climb.climbCon();
      }

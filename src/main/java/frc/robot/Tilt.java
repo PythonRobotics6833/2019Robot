@@ -25,7 +25,6 @@ public Tilt(int victor2, Joystick stick)
     this.rightStick = stick;
     speed = 1;
 }
-//works better, uses the right stick 
 public void stickMove()
 {
     boolean hold = rightStick.getRawButton(6);
@@ -40,21 +39,6 @@ victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
     }
 }
 
-//doesnt work 
-public void tiltController()
-{
-   
- if(rightStick.getRawAxis(5) > .1)
-    {
-        victor1.setSpeed(speed);
-    }
-   if(rightStick.getRawAxis(5) < -.1)
-   {
-        victor1.setSpeed(-speed);
-   }
-
 }
-}
-    
  
 

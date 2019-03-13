@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.Joystick;
 /**
  * Add your docs here.
  */
-//make a button boolean 
-//
 public class Intake {
     double WindowSpeed;
     PWMVictorSPX WindowMotor;

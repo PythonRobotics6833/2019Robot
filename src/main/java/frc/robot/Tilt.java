@@ -16,7 +16,7 @@ public class Tilt {
 Joystick rightStick;
 PWMVictorSPX victor1;
 double speed;
-double speedLimiter = 2;
+double speedLimiter = 2.3;
 
 
 public Tilt(int victor2, Joystick stick)
@@ -28,12 +28,22 @@ public Tilt(int victor2, Joystick stick)
 //works better, uses the right stick 
 public void stickMove()
 {
-
-victor1.setSpeed(-rightStick.getRawAxis(5)/speedLimiter);
+    boolean hold = rightStick.getRawButton(6);
+    if(hold == true)
+    {
+          victor1.setSpeed(-.05); 
+          System.out.println("Hold");
+    }
+    else
+    {
+victor1.setSpeed(rightStick.getRawAxis(5)/speedLimiter);
+    }
 }
+
 //doesnt work 
 public void tiltController()
 {
+   
  if(rightStick.getRawAxis(5) > .1)
     {
         victor1.setSpeed(speed);
@@ -42,11 +52,8 @@ public void tiltController()
    {
         victor1.setSpeed(-speed);
    }
- else if(rightStick.getRawAxis(5) == 0);
- {
-       victor1.setSpeed(0.01); }
- }
 
+}
 }
     
  

@@ -16,9 +16,9 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+/*import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+*/
 
 
 /**
@@ -29,10 +29,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot{
-  private static final String kDefaultAuto = "Default";
+  /*private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  */
   //makes the variables 
    Joystick stick;
    Joystick Controller2; 
@@ -51,39 +52,38 @@ public class Robot extends TimedRobot{
     //m_chooser.addOption("My Auto", kCustomAuto);
     //SmartDashboard.putData("Auto choices", m_chooser);
 
-
+    //sets up the ports 
     stick = new Joystick(0); 
     Controller2= new Joystick(1);
-    //DriveTrain sets up your ports 
      DriveTrain= new drivetrain(0,1,2,3 ,stick);
-    //arm sets the input of the motor and start for the boolean
     arm = new Intake(8, Controller2);
     Climb = new Climber (5, stick);
     lift = new ButterFlyLift(6, Controller2);
     tilt = new Tilt(9, Controller2);
 
-    /*
-     CameraServer.getInstance().startAutomaticCapture(0);
-    CameraServer.getInstance().startAutomaticCapture(1);
-   
+    //Old/Not Complicated Camera Setup
+    // CameraServer.getInstance().startAutomaticCapture(0);
+    //CameraServer.getInstance().startAutomaticCapture(1);
+
+   //only have the thread or the above, not both
     new Thread(() -> {
-        boolean allowCam1=false;
+      boolean allowCam1=false;
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Front",0);
-        camera.setResolution(640, 480);
+        camera.setResolution(160, 120);
         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("back",1);
-        camera1.setResolution(640, 480);
+        camera1.setResolution(160, 120);
 
         CvSink cvSink1 = CameraServer.getInstance().getVideo(camera);
         CvSink cvSink2= CameraServer.getInstance().getVideo(camera1);
         CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 160, 120);
-        
+
         Mat image = new Mat();
-        
+
         while(!Thread.interrupted()) {
-          if(stick.getRawButton(3)) {
+          if(stick.getRawButton(1)) {
             allowCam1 = !allowCam1;
           }
-          
+
             if(allowCam1){
               cvSink2.setEnabled(false);
               cvSink1.setEnabled(true);
@@ -96,8 +96,6 @@ public class Robot extends TimedRobot{
             outputStream.putFrame(image);
         }
     }).start(); 
-   
-*/
   }
     /**
    * This function is called every robot packet, no matter the mode. Use

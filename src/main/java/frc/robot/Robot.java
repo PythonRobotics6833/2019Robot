@@ -16,7 +16,6 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import org.opencv.imgproc.Imgproc;
 /*import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 */
@@ -42,7 +41,8 @@ public class Robot extends TimedRobot{
    Intake arm; 
    Climber Climb; 
    ButterFlyLift lift; 
-   Tilt tilt;
+   //Tilt tilt;
+   Shooter shooter;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -57,28 +57,29 @@ public class Robot extends TimedRobot{
     stick = new Joystick(0); 
     Controller2= new Joystick(1);
      DriveTrain= new drivetrain(0,1,2,3 ,stick);
-    arm = new Intake(8, Controller2);
+    arm = new Intake(8, 9, Controller2);
     Climb = new Climber (5, stick);
     lift = new ButterFlyLift(6, Controller2);
-    tilt = new Tilt(9, Controller2);
-
+    //arm = new Intake(8, Controller2);
+    //tilt = new Tilt(9, Controller2);
+  //  shooter = new Shooter(8, 9, Controller2);
     //Old/Not Complicated Camera Setup
   // CameraServer.getInstance().startAutomaticCapture(0);
- //   CameraServer.getInstance().startAutomaticCapture(1);
+    //CameraServer.getInstance().startAutomaticCapture(1);
 
    //only have the thread or the above, not both
 
    
-    new Thread(() -> {
-      boolean allowCam1=false;
+   new Thread(() -> {
+        boolean allowCam1=false;
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Cam1",0);
-        camera.setResolution(640, 320);
+        camera.setResolution(640, 480);
         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture("Cam2",1);
-        camera1.setResolution(320, 240);
+        camera1.setResolution(640, 480);
 
         CvSink cvSink1 = CameraServer.getInstance().getVideo(camera);
-        CvSink cvSink2= CameraServer.getInstance().getVideo(camera1);
-        CvSource outputStream = CameraServer.getInstance().putVideo("Both", 640, 320);
+        CvSink cvSink2 = CameraServer.getInstance().getVideo(camera1);
+        CvSource outputStream = CameraServer.getInstance().putVideo("Both", 640, 480);
 
         Mat image = new Mat();
 
@@ -99,6 +100,7 @@ public class Robot extends TimedRobot{
             outputStream.putFrame(image);
         }
     }).start(); 
+    
    
     
   }
@@ -114,41 +116,34 @@ public class Robot extends TimedRobot{
   public void robotPeriodic() {
   }
 
-  /**
-   * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString line to get the auto name from the text box below the Gyro
-   *
-   * <p>You can add additional auto modes by adding additional comparisons to
-   * the switch structure below with additional strings. If using the
-   * SendableChooser make sure to add them to the chooser code above as well.
-   */
-  @Override
-  public void autonomousInit() {
-    /* 
-     m_autoSelected = m_chooser.getSelected();
-     m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-     System.out.println("Auto selected: " + m_autoSelected);
-    */
-  }
 
-  /**
-   * This function is called periodically during autonomous.
-   */
   @Override
   public void autonomousPeriodic() {
-    /*switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
+  
+       //this space calls it to function 
+  
+   //this one is for regular drive
+   //DriveTrain.tankdrive();
+   //this boolean is for switching between one stick and two stick drive 
+   boolean DriveSwitch = stick.getRawButton(5);
+   //moving the arm with a stick
+   lift.analogMove();
+   //moves the tilt on a stick 
+   //tilt.stickMove();
+  // shooter.intake();
+   //Moves the the latch based on left and right bumpers 
+   arm.ControllerAxis(); 
+   //the if to switcing to driving and climbing 
+  if (DriveSwitch == true)
+    {
+      //tankDrive2 is the one stick drive (only forward and back)
+     DriveTrain.tankDrive2();
+     Climb.climbCon();
     }
-    */
+   else if (DriveSwitch =! stick.getRawButton(6))
+    {
+     DriveTrain.tankdrive();
+    }
   }
 
   /**
@@ -163,10 +158,11 @@ public class Robot extends TimedRobot{
    //DriveTrain.tankdrive();
    //this boolean is for switching between one stick and two stick drive 
    boolean DriveSwitch = stick.getRawButton(5);
-    //moving the arm with a stick
+    
     lift.analogMove();
     //moves the tilt on a stick 
-    tilt.stickMove();
+    //tilt.stickMove();
+   // shooter.intake();
     //Moves the the latch based on left and right bumpers 
     arm.ControllerAxis(); 
     //the if to switcing to driving and climbing 

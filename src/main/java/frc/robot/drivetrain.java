@@ -62,9 +62,9 @@ public class drivetrain {
         //Joystick raw axis is right bumper for Logitech
         v_speedLimiter = joystick.getRawAxis(speedLimiterAxis);
         //1 is the left stick value 
-        left_c =  -joystick.getRawAxis(1)/(2-v_speedLimiter);
+        left_c =  -joystick.getRawAxis(1)/(1.75-v_speedLimiter);
         //5 is the right stick value
-        right_c = -joystick.getRawAxis(5)/(2-v_speedLimiter);
+        right_c = -joystick.getRawAxis(5)/(1.75-v_speedLimiter);
         //attaches the limiters to the controls 
         MyDrive.tankDrive(left_c, right_c);
         //the speed limiter halfs the speed unless pushed by "right bumper"

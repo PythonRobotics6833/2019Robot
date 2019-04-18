@@ -15,11 +15,13 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Intake {
     double WindowSpeed;
     PWMVictorSPX WindowMotor;
+    PWMVictorSPX WindowMotor2;
     Joystick stick; 
     
-  public Intake(int Close, Joystick stick1){
+  public Intake(int Close, int Close2, Joystick stick1){
         WindowMotor = new PWMVictorSPX(Close);
-        WindowSpeed = 1;       
+        WindowMotor2 = new PWMVictorSPX(Close2);
+        WindowSpeed = .7;       
          this.stick=stick1;
     
     }
@@ -27,17 +29,19 @@ public class Intake {
     //moves the window motor using the bumpers on the controllers
     public void ControllerAxis(){
 
-      if(stick.getRawAxis(3) > 0){
-            WindowMotor.set(WindowSpeed);
+      if(stick.getRawAxis(3) > 0.1){
+            WindowMotor.set(stick.getRawAxis(3)/2);
+            WindowMotor2.set(stick.getRawAxis(3)/2);
       }
-  
-      if(stick.getRawAxis(2) > 0){
-         WindowMotor.set(-WindowSpeed);
+      else if(stick.getRawAxis(2) > 0.1){
+         WindowMotor.set(stick.getRawAxis(2)/-2);
+         WindowMotor2.set(stick.getRawAxis(2)/-2);
       }
-      else if(stick.getRawAxis(2) == 0 && stick.getRawAxis(3) == 0)
+      else
       {
       
         WindowMotor.set(0.0);
+        WindowMotor2.set(0.0);
       }
 
     }

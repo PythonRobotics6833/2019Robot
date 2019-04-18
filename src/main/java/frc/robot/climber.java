@@ -27,7 +27,7 @@ public class Climber {
     public void climbCon(){ 
           {
               //Binds the left joystick to moving the climber
-            ClimbMotor.setSpeed(-joystick.getRawAxis(1));
+            ClimbMotor.setSpeed(joystick.getRawAxis(1));
           }
     }
 

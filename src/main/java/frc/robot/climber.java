@@ -25,10 +25,9 @@ public class Climber {
         ClimbMotor=new PWMVictorSPX(VictorMotorLeft1);
     }
     public void climbCon(){ 
-          {
-              //Binds the left joystick to moving the climber
+            //Binds the left joystick to moving the climber
             ClimbMotor.setSpeed(joystick.getRawAxis(1));
-          }
+          
     }
 
 }

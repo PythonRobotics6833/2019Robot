@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -78,4 +79,27 @@ public class drivetrain {
          MyDrive.tankDrive(right_c, right_c);
     }
 
+    //autonomous code 
+    public void Auto() 
+    {
+
+        //it just runs the motors at .1 speed until auto is off
+      boolean Switch = false;
+        if(Switch == true)
+        {
+        Motor1.set(.1);
+        Motor2.set(.1);
+        Motor3.set(-.1);
+        Motor4.set(-.1);
+        }
+        else if (Switch == false)
+        {
+            Motor1.set(0);
+            Motor2.set(0);
+            Motor3.set(0);
+            Motor4.set(0);
+            
+        }
+
+    }
 }   

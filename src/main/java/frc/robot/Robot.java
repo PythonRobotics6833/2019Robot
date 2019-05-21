@@ -42,7 +42,6 @@ public class Robot extends TimedRobot{
    Climber Climb; 
    ButterFlyLift lift; 
    //Tilt tilt;
-   Shooter shooter;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -60,6 +59,7 @@ public class Robot extends TimedRobot{
     arm = new Intake(8, 9, Controller2);
     Climb = new Climber (5, stick);
     lift = new ButterFlyLift(6, Controller2);
+    
     //arm = new Intake(8, Controller2);
     //tilt = new Tilt(9, Controller2);
   //  shooter = new Shooter(8, 9, Controller2);
@@ -69,7 +69,7 @@ public class Robot extends TimedRobot{
 
    //only have the thread or the above, not both
 
-   
+   /*
    new Thread(() -> {
         boolean allowCam1=false;
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Cam1",0);
@@ -101,7 +101,7 @@ public class Robot extends TimedRobot{
         }
     }).start(); 
     
-   
+   */
     
   }
     /**
@@ -119,7 +119,7 @@ public class Robot extends TimedRobot{
 
   @Override
   public void autonomousPeriodic() {
-  
+  /*
        //this space calls it to function 
   
    //this one is for regular drive
@@ -144,6 +144,9 @@ public class Robot extends TimedRobot{
     {
      DriveTrain.tankdrive();
     }
+    */
+    DriveTrain.Auto();
+    lift.AutoA(); 
   }
 
   /**

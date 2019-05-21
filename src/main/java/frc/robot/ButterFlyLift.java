@@ -71,6 +71,16 @@ public class ButterFlyLift
     public void analogMove()
     {
         armMotor.setSpeed(-Player2.getRawAxis(1)/2);
+        if(-Player2.getRawAxis(1)/2>.01)
+        {
+            System.out.println(-Player2.getRawAxis(1)/2);
+        }
+      
+    }
+    public void AutoA()
+    {
+        armMotor.set(.3);
+
     }
     //This uses the controller to set the arm to direct positions on the robot
     public void digitalMove()
@@ -184,6 +194,7 @@ public class ButterFlyLift
             System.out.print("Error:");
         }
     }
+    
 
 }
 

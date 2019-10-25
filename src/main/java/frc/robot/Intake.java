@@ -22,6 +22,7 @@ public class Intake {
     so we set a deadzone, so unless its greater than ".15"
     it won't run */
     double deadZone=0.15; 
+    private float voltage_d; 
     
   public Intake(int Close, int Close2, Joystick stick1){
         //the motors are the left and right side
@@ -36,12 +37,12 @@ public class Intake {
     public void ControllerAxis(){
 
       if(stick.getRawAxis(3) > deadZone){
-            WindowMotor.set(-stick.getRawAxis(3)/2);
-            WindowMotor2.set(stick.getRawAxis(3)/2);
+            WindowMotor.set(-stick.getRawAxis(3)/2-voltage_d);
+            WindowMotor2.set(stick.getRawAxis(3)/2-voltage_d);
       }
       else if(stick.getRawAxis(2) > deadZone){
-         WindowMotor.set(stick.getRawAxis(2)/2);
-         WindowMotor2.set(-stick.getRawAxis(2)/2);
+         WindowMotor.set(stick.getRawAxis(2)/2-voltage_d);
+         WindowMotor2.set(-stick.getRawAxis(2)/2-voltage_d);
       }
       else
       {

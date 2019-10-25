@@ -29,10 +29,7 @@ public class drivetrain {
     //3 is the right bumper on the Controller 
     private int speedLimiterAxis=3;
     //Base constructer
-    public drivetrain()
-    {
-        return;
-    }
+   
 
     
     //FRC 2019 main robot

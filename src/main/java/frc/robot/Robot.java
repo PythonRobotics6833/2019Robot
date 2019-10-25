@@ -64,12 +64,13 @@ public class Robot extends TimedRobot{
     //tilt = new Tilt(9, Controller2);
   //  shooter = new Shooter(8, 9, Controller2);
     //Old/Not Complicated Camera Setup
-  // CameraServer.getInstance().startAutomaticCapture(0);
-    //CameraServer.getInstance().startAutomaticCapture(1);
+// CameraServer.getInstance().startAutomaticCapture(0);
+ //CameraServer.getInstance().startAutomaticCapture(1);
+ 
 
    //only have the thread or the above, not both
 
-   /*
+  
    new Thread(() -> {
         boolean allowCam1=false;
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("Cam1",0);
@@ -79,11 +80,11 @@ public class Robot extends TimedRobot{
 
         CvSink cvSink1 = CameraServer.getInstance().getVideo(camera);
         CvSink cvSink2 = CameraServer.getInstance().getVideo(camera1);
-        CvSource outputStream = CameraServer.getInstance().putVideo("Both", 640, 480);
+        //CvSource outputStream = CameraServer.getInstance().putVideo("Both", 640, 480);
 
-        Mat image = new Mat();
+       //m Mat image = new Mat();
 
-        while(!Thread.interrupted()) {
+     /*   while(!Thread.interrupted()) {
           if(stick.getRawButton(1)) {
             allowCam1 = !allowCam1;
           }
@@ -98,10 +99,10 @@ public class Robot extends TimedRobot{
               cvSink2.grabFrame(image, 2);     
             }
             outputStream.putFrame(image);
-        }
+        } */
     }).start(); 
     
-   */
+   
     
   }
     /**
@@ -119,7 +120,7 @@ public class Robot extends TimedRobot{
 
   @Override
   public void autonomousPeriodic() {
-  /*
+  
        //this space calls it to function 
   
    //this one is for regular drive
@@ -140,13 +141,11 @@ public class Robot extends TimedRobot{
      DriveTrain.tankDrive2();
      Climb.climbCon();
     }
-   else if (DriveSwitch =! stick.getRawButton(6))
+   else
     {
      DriveTrain.tankdrive();
     }
-    */
-    DriveTrain.Auto();
-    lift.AutoA(); 
+    
   }
 
   /**
@@ -175,7 +174,7 @@ public class Robot extends TimedRobot{
       DriveTrain.tankDrive2();
       Climb.climbCon();
      }
-    else if (DriveSwitch =! stick.getRawButton(5))
+    else 
      {
       DriveTrain.tankdrive();
      }

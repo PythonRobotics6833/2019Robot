@@ -49,25 +49,13 @@ public class Robot extends TimedRobot{
    */
   @Override
   public void robotInit() {
-    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    //m_chooser.addOption("My Auto", kCustomAuto);
-    //SmartDashboard.putData("Auto choices", m_chooser);
-
     //sets up the ports 
     stick = new Joystick(0); 
     Controller2= new Joystick(1);
      DriveTrain= new drivetrain(0,1,2,3 ,stick);
     arm = new Intake(8, 9, Controller2);
     Climb = new Climber (5, stick);
-    lift = new ButterFlyLift(6, Controller2);
-    
-    //arm = new Intake(8, Controller2);
-    //tilt = new Tilt(9, Controller2);
-  //  shooter = new Shooter(8, 9, Controller2);
-    //Old/Not Complicated Camera Setup
-// CameraServer.getInstance().startAutomaticCapture(0);
- //CameraServer.getInstance().startAutomaticCapture(1);
- 
+    lift = new ButterFlyLift(6, Controller2); 
 
    //only have the thread or the above, not both
 
